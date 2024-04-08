@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_39fc1f4eec30e41c80b441b36331cc46 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div id="legend" style="position: fixed; 
+     bottom: 20px; left: 20px; width: auto; height: auto; 
+     border:2px solid grey; z-index:9999; font-size:14px;
+     background-color:white;
+     padding: 10px; overflow-y: auto;">
+     <strong>TSP Path Route:</strong><br>
+0: Golden Gate Bridge<br>1: Golden Gate Park<br>2: Painted Ladies<br>3: Alta Plaza Park<br>4: San Francisco Museum of Modern Art<br>5: Union Square<br>6: Coit Tower<br>7: Lombard Street<br>8: Alcatraz Island<br>9: Fishermans Wharf<br>10: Ghirardelli Square<br>11: Palace of Fine Arts Theatre<br>12: Golden Gate Bridge<br>
+</div>
+    
+            <div class="folium-map" id="map_39fc1f4eec30e41c80b441b36331cc46" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_39fc1f4eec30e41c80b441b36331cc46 = L.map(
+                "map_39fc1f4eec30e41c80b441b36331cc46",
+                {
+                    center: [37.799092845833336, -122.43136601491905],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 11,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_a9eaa640f7eeaf622ef2687c8fbe13ba = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detectRetina": false, "maxNativeZoom": 19, "maxZoom": 19, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+        
+    
+            tile_layer_a9eaa640f7eeaf622ef2687c8fbe13ba.addTo(map_39fc1f4eec30e41c80b441b36331cc46);
+        
+    
+            var poly_line_efeddf9900b56c09113576dffc27cf2b = L.polyline(
+                [[37.8313579, -122.4787012], [37.8339052, -122.4785668], [37.8351379, -122.4800354], [37.8389042, -122.4852439], [37.837865, -122.4830378], [37.8364862, -122.4833432], [37.8360403, -122.4839782], [37.8344241, -122.4846397], [37.8342731, -122.4843774], [37.8337847, -122.4836334], [37.8323309, -122.4808782], [37.8080612, -122.4765748], [37.8079783, -122.4765232], [37.8076538, -122.4763172], [37.8066603, -122.4753016], [37.8063379, -122.4754212], [37.8044147, -122.4756609], [37.8039093, -122.4757073], [37.7988099, -122.4787026], [37.7983096, -122.4789311], [37.7942988, -122.4804229], [37.7933938, -122.4807275], [37.7923601, -122.4810193], [37.7922152, -122.4810574], [37.7906893, -122.4815695], [37.7887596, -122.4822935], [37.7876159, -122.485295], [37.7857538, -122.4851604], [37.7838903, -122.4850257], [37.7820218, -122.4848906], [37.7801617, -122.4847561], [37.780035, -122.484747], [37.7781732, -122.4846124], [37.7763062, -122.4844774], [37.7744399, -122.4843425], [37.7725724, -122.4842075], [37.7718375, -122.4817567], [37.7704966, -122.4799241]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_39fc1f4eec30e41c80b441b36331cc46);
+        
+    
+            var marker_4e84214f1fa7f9efed311b45c835e043 = L.marker(
+                [37.7704966, -122.4799241],
+                {}
+            ).addTo(map_39fc1f4eec30e41c80b441b36331cc46);
+        
+    
+            var icon_93075e4c0799c436fc559db866d6113c = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_4e84214f1fa7f9efed311b45c835e043.setIcon(icon_93075e4c0799c436fc559db866d6113c);
+        
+    
+        var popup_98dd114063919e48bdc040d33185d3c5 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_e581ae1a05712c2a1b0b55d5e48f7d4f = $(`<div id="html_e581ae1a05712c2a1b0b55d5e48f7d4f" style="width: 100.0%; height: 100.0%;">Stop 1: Golden Gate Park</div>`)[0];
+                popup_98dd114063919e48bdc040d33185d3c5.setContent(html_e581ae1a05712c2a1b0b55d5e48f7d4f);
+            
+        
+
+        marker_4e84214f1fa7f9efed311b45c835e043.bindPopup(popup_98dd114063919e48bdc040d33185d3c5)
+        ;
+
+        
+    
+    
+            var poly_line_766f19d081f0bab0e762166746c0996c = L.polyline(
+                [[37.7704966, -122.4799241], [37.7718375, -122.4817567], [37.7719311, -122.4817745], [37.7725724, -122.4842075], [37.7726204, -122.4831346], [37.7726691, -122.4820656], [37.7727177, -122.480997], [37.772767, -122.4799226], [37.7728153, -122.4788519], [37.7728643, -122.4777813], [37.7729132, -122.4767122], [37.7729623, -122.4756391], [37.7730112, -122.474569], [37.7730626, -122.4734452], [37.7731138, -122.4723243], [37.7731354, -122.471854], [37.7731416, -122.4717198], [37.7731629, -122.4712572], [37.7732107, -122.4701823], [37.7732585, -122.4691082], [37.7733056, -122.468049], [37.7733548, -122.4669692], [37.7734035, -122.4658983], [37.7735017, -122.4648303], [37.7736374, -122.4637661], [37.7737728, -122.4627059], [37.7739091, -122.4616383], [37.7740454, -122.4605707], [37.7741812, -122.4595066], [37.7742984, -122.4583894], [37.7745557, -122.4563068], [37.7746873, -122.4552749], [37.774764, -122.454668], [37.7749872, -122.4529258], [37.7751857, -122.4513731], [37.775396, -122.4497281], [37.7755051, -122.4488751], [37.7756008, -122.4481262], [37.7756853, -122.4474655], [37.7758035, -122.4465376], [37.7758145, -122.4464549], [37.7760252, -122.4447938], [37.7762357, -122.4431449], [37.7764448, -122.4415072], [37.7766536, -122.4398652], [37.7768602, -122.4382406], [37.776872, -122.4381475], [37.7770786, -122.4365257], [37.7772895, -122.4348708], [37.7774974, -122.4332393], [37.7765672, -122.4330511]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_39fc1f4eec30e41c80b441b36331cc46);
+        
+    
+            var marker_884458379335ad69b4bbdb7140cff2f7 = L.marker(
+                [37.7765672, -122.4330511],
+                {}
+            ).addTo(map_39fc1f4eec30e41c80b441b36331cc46);
+        
+    
+            var icon_a92438ea183ab3b3c81e76b2b98be5fb = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_884458379335ad69b4bbdb7140cff2f7.setIcon(icon_a92438ea183ab3b3c81e76b2b98be5fb);
+        
+    
+        var popup_d50247183278b13df05b9a890aaddaf3 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_b373966c531d6754a976712338e388a0 = $(`<div id="html_b373966c531d6754a976712338e388a0" style="width: 100.0%; height: 100.0%;">Stop 2: Painted Ladies</div>`)[0];
+                popup_d50247183278b13df05b9a890aaddaf3.setContent(html_b373966c531d6754a976712338e388a0);
+            
+        
+
+        marker_884458379335ad69b4bbdb7140cff2f7.bindPopup(popup_d50247183278b13df05b9a890aaddaf3)
+        ;
+
+        
+    
+    
+            var poly_line_388f9068386927055e871d02b970f863 = L.polyline(
+                [[37.7765672, -122.4330511], [37.7774974, -122.4332393], [37.7784279, -122.4334247], [37.7793593, -122.433613], [37.7802924, -122.4338018], [37.7812262, -122.43399], [37.7821549, -122.4341786], [37.783081, -122.4343659], [37.7840028, -122.4345537], [37.7841009, -122.4345736], [37.7842141, -122.4345957], [37.7843, -122.4346118], [37.7849553, -122.4347436], [37.7858859, -122.4349323], [37.7868155, -122.43512], [37.7877468, -122.4353078], [37.7887012, -122.4355004], [37.789628, -122.4356874], [37.7905108, -122.435866], [37.7913898, -122.4360438], [37.7922658, -122.4362186], [37.7920583, -122.4378615]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_39fc1f4eec30e41c80b441b36331cc46);
+        
+    
+            var marker_d97956024f8caa97370148cba04fe29c = L.marker(
+                [37.7920583, -122.4378615],
+                {}
+            ).addTo(map_39fc1f4eec30e41c80b441b36331cc46);
+        
+    
+            var icon_c448ba009945cafe49ececbe034aea18 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_d97956024f8caa97370148cba04fe29c.setIcon(icon_c448ba009945cafe49ececbe034aea18);
+        
+    
+        var popup_bf972b41f714d06d6b5f0560cd7e94c1 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_60fb64872303d8cff2c5bbd2f41efbe3 = $(`<div id="html_60fb64872303d8cff2c5bbd2f41efbe3" style="width: 100.0%; height: 100.0%;">Stop 3: Alta Plaza Park</div>`)[0];
+                popup_bf972b41f714d06d6b5f0560cd7e94c1.setContent(html_60fb64872303d8cff2c5bbd2f41efbe3);
+            
+        
+
+        marker_d97956024f8caa97370148cba04fe29c.bindPopup(popup_bf972b41f714d06d6b5f0560cd7e94c1)
+        ;
+
+        
+    
+    
+            var poly_line_2bd0a60153706edc26fce8463b0a5047 = L.polyline(
+                [[37.7920583, -122.4378615], [37.7922658, -122.4362186], [37.7924773, -122.4345767], [37.7926833, -122.4329307], [37.7918067, -122.4327487], [37.7920153, -122.431109], [37.7922234, -122.4294656], [37.7913467, -122.4292888], [37.7904668, -122.4291113], [37.7895373, -122.4289237], [37.7897469, -122.42728], [37.7899559, -122.4256361], [37.7901653, -122.4239912], [37.7903204, -122.4224559], [37.7903274, -122.422385], [37.7894161, -122.4221849], [37.7884892, -122.4219635], [37.7885052, -122.4218537], [37.7886974, -122.4203209], [37.7889065, -122.4186753], [37.789115, -122.4170349], [37.7893258, -122.4153867], [37.7895358, -122.4137429], [37.7897443, -122.4120997], [37.7899531, -122.4104533], [37.7901561, -122.4088536], [37.7892289, -122.4086156], [37.7882931, -122.4084335], [37.7883768, -122.4077722], [37.7885009, -122.4067939], [37.7887033, -122.4052473], [37.788901, -122.4036842], [37.7891058, -122.4020317], [37.7882801, -122.4015241], [37.78789, -122.401043], [37.7877045, -122.4008211], [37.7874553, -122.4005089], [37.787029, -122.3999959], [37.7866465, -122.3995184], [37.786068, -122.4002541]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_39fc1f4eec30e41c80b441b36331cc46);
+        
+    
+            var marker_1d7ea79512f2ac5ec15b0fc11dd9824f = L.marker(
+                [37.786068, -122.4002541],
+                {}
+            ).addTo(map_39fc1f4eec30e41c80b441b36331cc46);
+        
+    
+            var icon_c095aa72f4f15f03dd5a78ffde947548 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_1d7ea79512f2ac5ec15b0fc11dd9824f.setIcon(icon_c095aa72f4f15f03dd5a78ffde947548);
+        
+    
+        var popup_02346cd135ee5a86890648b5910ef3cc = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_130366f8a354e081b194a96cf92a0b27 = $(`<div id="html_130366f8a354e081b194a96cf92a0b27" style="width: 100.0%; height: 100.0%;">Stop 4: San Francisco Museum of Modern Art</div>`)[0];
+                popup_02346cd135ee5a86890648b5910ef3cc.setContent(html_130366f8a354e081b194a96cf92a0b27);
+            
+        
+
+        marker_1d7ea79512f2ac5ec15b0fc11dd9824f.bindPopup(popup_02346cd135ee5a86890648b5910ef3cc)
+        ;
+
+        
+    
+    
+            var poly_line_d83919f91cff94d5405c0cdd60c7e093 = L.polyline(
+                [[37.786068, -122.4002541], [37.7866465, -122.3995184], [37.7862063, -122.3989843], [37.7858875, -122.3993791], [37.7850152, -122.4004778], [37.785834, -122.4015071], [37.7862613, -122.4020414], [37.7866798, -122.4025729], [37.7870311, -122.403019], [37.7879652, -122.4034972], [37.7877685, -122.4050568], [37.787577, -122.4065906], [37.7875723, -122.4066994]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_39fc1f4eec30e41c80b441b36331cc46);
+        
+    
+            var marker_cbe56de8554a6ed4e0f201d30d9f1d42 = L.marker(
+                [37.7875723, -122.4066994],
+                {}
+            ).addTo(map_39fc1f4eec30e41c80b441b36331cc46);
+        
+    
+            var icon_78444343675808fdb2715e5427f917ac = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_cbe56de8554a6ed4e0f201d30d9f1d42.setIcon(icon_78444343675808fdb2715e5427f917ac);
+        
+    
+        var popup_6f4f5509364322746c9d4a20317e97c7 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_3220d405636aae30f1042293d5252898 = $(`<div id="html_3220d405636aae30f1042293d5252898" style="width: 100.0%; height: 100.0%;">Stop 5: Union Square</div>`)[0];
+                popup_6f4f5509364322746c9d4a20317e97c7.setContent(html_3220d405636aae30f1042293d5252898);
+            
+        
+
+        marker_cbe56de8554a6ed4e0f201d30d9f1d42.bindPopup(popup_6f4f5509364322746c9d4a20317e97c7)
+        ;
+
+        
+    
+    
+            var poly_line_76f7de6b683aeb70a81f5923959af834 = L.polyline(
+                [[37.7875723, -122.4066994], [37.7873704, -122.4082462], [37.7878249, -122.4083373], [37.7882931, -122.4084335], [37.7892289, -122.4086156], [37.7901678, -122.4087612], [37.7910983, -122.408952], [37.7920556, -122.4091426], [37.792979, -122.4093646], [37.7934018, -122.4094534], [37.7938585, -122.4095539], [37.7940653, -122.4079135], [37.7949473, -122.4080914], [37.7958275, -122.408269], [37.7967087, -122.4084468], [37.7976269, -122.4086323], [37.7985794, -122.4088248], [37.7994866, -122.4090014], [37.7997187, -122.4074144], [37.8006438, -122.4075992], [37.8015732, -122.40779], [37.8017651, -122.4062893]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_39fc1f4eec30e41c80b441b36331cc46);
+        
+    
+            var marker_4e8c57c4ea8435130e5535c609b37962 = L.marker(
+                [37.8017651, -122.4062893],
+                {}
+            ).addTo(map_39fc1f4eec30e41c80b441b36331cc46);
+        
+    
+            var icon_78e4b0527d33b85478cf896b160c155f = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_4e8c57c4ea8435130e5535c609b37962.setIcon(icon_78e4b0527d33b85478cf896b160c155f);
+        
+    
+        var popup_1a0fac4dee452abc6342c8cdb95aeeed = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_fe2db5cd7a8b10280e1673b0284c5a3f = $(`<div id="html_fe2db5cd7a8b10280e1673b0284c5a3f" style="width: 100.0%; height: 100.0%;">Stop 6: Coit Tower</div>`)[0];
+                popup_1a0fac4dee452abc6342c8cdb95aeeed.setContent(html_fe2db5cd7a8b10280e1673b0284c5a3f);
+            
+        
+
+        marker_4e8c57c4ea8435130e5535c609b37962.bindPopup(popup_1a0fac4dee452abc6342c8cdb95aeeed)
+        ;
+
+        
+    
+    
+            var poly_line_a7039e7c813f0dbc8ef8b78bf5eb911d = L.polyline(
+                [[37.8017651, -122.4062893], [37.8015732, -122.40779], [37.8013747, -122.4093899], [37.8011708, -122.4110326], [37.8011339, -122.411329], [37.8019319, -122.4124825], [37.802184, -122.412908], [37.8027514, -122.4137205], [37.8026281, -122.4146963], [37.8024197, -122.4163381], [37.8022186, -122.4179869]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_39fc1f4eec30e41c80b441b36331cc46);
+        
+    
+            var marker_d8971c78cbc91f2c0c684afbb8a043f7 = L.marker(
+                [37.8022186, -122.4179869],
+                {}
+            ).addTo(map_39fc1f4eec30e41c80b441b36331cc46);
+        
+    
+            var icon_c0407f9aaa547dbb979bb9281fc072dc = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_d8971c78cbc91f2c0c684afbb8a043f7.setIcon(icon_c0407f9aaa547dbb979bb9281fc072dc);
+        
+    
+        var popup_3cbd05dde28f1317768a88e8a23e0c8b = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_2b1775f4e7c1efe4c433c480d774c64e = $(`<div id="html_2b1775f4e7c1efe4c433c480d774c64e" style="width: 100.0%; height: 100.0%;">Stop 7: Lombard Street</div>`)[0];
+                popup_3cbd05dde28f1317768a88e8a23e0c8b.setContent(html_2b1775f4e7c1efe4c433c480d774c64e);
+            
+        
+
+        marker_d8971c78cbc91f2c0c684afbb8a043f7.bindPopup(popup_3cbd05dde28f1317768a88e8a23e0c8b)
+        ;
+
+        
+    
+    
+            var poly_line_6f9de9eaf1d521382e0112f4c1cbd747 = L.polyline(
+                [[37.8022186, -122.4179869], [37.8031282, -122.4181701], [37.8033521, -122.4182152], [37.8040832, -122.4183625], [37.8050084, -122.4185489], [37.8059219, -122.4187348], [37.8059579, -122.4185544], [37.8059809, -122.4183879], [37.80615, -122.4170945], [37.8070797, -122.4172792], [37.8079929, -122.4174625], [37.8082236, -122.4158033], [37.808973, -122.4158432], [37.8091669, -122.4165994], [37.8109611, -122.4189847]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_39fc1f4eec30e41c80b441b36331cc46);
+        
+    
+            var marker_5bb389f8bf5e51469307ce89c7aa67c5 = L.marker(
+                [37.8109611, -122.4189847],
+                {}
+            ).addTo(map_39fc1f4eec30e41c80b441b36331cc46);
+        
+    
+            var icon_226b11ee44ee8104e9e328329daebdd3 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_5bb389f8bf5e51469307ce89c7aa67c5.setIcon(icon_226b11ee44ee8104e9e328329daebdd3);
+        
+    
+        var popup_ad84e1da0752825c82f54b39d5d71e41 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_72b48cd3e4b633a05fc0503ef6f810d0 = $(`<div id="html_72b48cd3e4b633a05fc0503ef6f810d0" style="width: 100.0%; height: 100.0%;">Stop 8: Alcatraz Island</div>`)[0];
+                popup_ad84e1da0752825c82f54b39d5d71e41.setContent(html_72b48cd3e4b633a05fc0503ef6f810d0);
+            
+        
+
+        marker_5bb389f8bf5e51469307ce89c7aa67c5.bindPopup(popup_ad84e1da0752825c82f54b39d5d71e41)
+        ;
+
+        
+    
+    
+            var poly_line_31304296bd88171e9be147060edef878 = L.polyline(
+                [[37.8109611, -122.4189847], [37.8091669, -122.4165994]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_39fc1f4eec30e41c80b441b36331cc46);
+        
+    
+            var marker_6d4be89f95cd1c15496bbea9e7fbc7e2 = L.marker(
+                [37.8091669, -122.4165994],
+                {}
+            ).addTo(map_39fc1f4eec30e41c80b441b36331cc46);
+        
+    
+            var icon_7c0f370b292c19251c451d596b1b87a3 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_6d4be89f95cd1c15496bbea9e7fbc7e2.setIcon(icon_7c0f370b292c19251c451d596b1b87a3);
+        
+    
+        var popup_30a6b895a1282f41a9b53b973dc066ad = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_b6f0ac213d308cecae1e83c82ff31ebc = $(`<div id="html_b6f0ac213d308cecae1e83c82ff31ebc" style="width: 100.0%; height: 100.0%;">Stop 9: Fishermans Wharf</div>`)[0];
+                popup_30a6b895a1282f41a9b53b973dc066ad.setContent(html_b6f0ac213d308cecae1e83c82ff31ebc);
+            
+        
+
+        marker_6d4be89f95cd1c15496bbea9e7fbc7e2.bindPopup(popup_30a6b895a1282f41a9b53b973dc066ad)
+        ;
+
+        
+    
+    
+            var poly_line_93c069c1f402aa32ce47d207f69dd284 = L.polyline(
+                [[37.8091669, -122.4165994], [37.808973, -122.4158432], [37.8082236, -122.4158033], [37.8079929, -122.4174625], [37.8077862, -122.4191053], [37.8068706, -122.4189289], [37.8062692, -122.4188198], [37.8059563, -122.4187769], [37.8059199, -122.4188398], [37.8057276, -122.4203838], [37.8055043, -122.4220485]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_39fc1f4eec30e41c80b441b36331cc46);
+        
+    
+            var marker_b23e329ac4e6f96eaa9538777f8048b4 = L.marker(
+                [37.8055043, -122.4220485],
+                {}
+            ).addTo(map_39fc1f4eec30e41c80b441b36331cc46);
+        
+    
+            var icon_b61edde8eb522f3562577bf3cc7b987b = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_b23e329ac4e6f96eaa9538777f8048b4.setIcon(icon_b61edde8eb522f3562577bf3cc7b987b);
+        
+    
+        var popup_b2b42d4ec7a8f1d23c1def70070e8f26 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_0779a37a7d356139c80901d4e212cfcf = $(`<div id="html_0779a37a7d356139c80901d4e212cfcf" style="width: 100.0%; height: 100.0%;">Stop 10: Ghirardelli Square</div>`)[0];
+                popup_b2b42d4ec7a8f1d23c1def70070e8f26.setContent(html_0779a37a7d356139c80901d4e212cfcf);
+            
+        
+
+        marker_b23e329ac4e6f96eaa9538777f8048b4.bindPopup(popup_b2b42d4ec7a8f1d23c1def70070e8f26)
+        ;
+
+        
+    
+    
+            var poly_line_0f52d36ae7c7ecf9b31cb4c9e263eb65 = L.polyline(
+                [[37.8055043, -122.4220485], [37.8052887, -122.4236702], [37.8043611, -122.4234834], [37.804161, -122.4250497], [37.8041423, -122.4252015], [37.8039436, -122.4267758], [37.8037362, -122.428419], [37.8035283, -122.4300655], [37.8033522, -122.4314708], [37.8032722, -122.4316968], [37.8030638, -122.4333436], [37.8028542, -122.43499], [37.80269, -122.4363193], [37.8027159, -122.4366472], [37.8027768, -122.4368167], [37.8029702, -122.4371871], [37.8031147, -122.4374556], [37.8025629, -122.4380059], [37.8015491, -122.4397198], [37.8012903, -122.4405267], [37.8011293, -122.4413856], [37.8009167, -122.4430541], [37.8007045, -122.4447194], [37.8004947, -122.4463646], [37.8004032, -122.4470876], [37.800801, -122.447663], [37.8009977, -122.4479515], [37.8020165, -122.4493813]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_39fc1f4eec30e41c80b441b36331cc46);
+        
+    
+            var marker_6ab5f8bfc9e8cdb32009392f94a098f2 = L.marker(
+                [37.8020165, -122.4493813],
+                {}
+            ).addTo(map_39fc1f4eec30e41c80b441b36331cc46);
+        
+    
+            var icon_609da729fd8dd5eb1a36049bbadf9e6b = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_6ab5f8bfc9e8cdb32009392f94a098f2.setIcon(icon_609da729fd8dd5eb1a36049bbadf9e6b);
+        
+    
+        var popup_8ab27bd09eb4d0b059e1eb739c5acce1 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_7fbd40ad09bdca212393a2d5b09ea74c = $(`<div id="html_7fbd40ad09bdca212393a2d5b09ea74c" style="width: 100.0%; height: 100.0%;">Stop 11: Palace of Fine Arts Theatre</div>`)[0];
+                popup_8ab27bd09eb4d0b059e1eb739c5acce1.setContent(html_7fbd40ad09bdca212393a2d5b09ea74c);
+            
+        
+
+        marker_6ab5f8bfc9e8cdb32009392f94a098f2.bindPopup(popup_8ab27bd09eb4d0b059e1eb739c5acce1)
+        ;
+
+        
+    
+    
+            var poly_line_399438028abfe49f7eb32731f54fa33b = L.polyline(
+                [[37.8020165, -122.4493813], [37.8033354, -122.4542059], [37.8026165, -122.467108], [37.8056358, -122.4736824], [37.806441, -122.4745516], [37.8069452, -122.4750049], [37.8325302, -122.4809568], [37.8333567, -122.482419], [37.8337609, -122.483074], [37.8356521, -122.483883], [37.8364862, -122.4833432], [37.837865, -122.4830378], [37.8389042, -122.4852439], [37.8351379, -122.4800354], [37.8339052, -122.4785668], [37.8313579, -122.4787012]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_39fc1f4eec30e41c80b441b36331cc46);
+        
+    
+            var marker_7d7d5a7d3a4428725c0b09db871127c0 = L.marker(
+                [37.8313579, -122.4787012],
+                {}
+            ).addTo(map_39fc1f4eec30e41c80b441b36331cc46);
+        
+    
+            var icon_3fb0c07a86e5e245772e26c58b14d2f3 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_7d7d5a7d3a4428725c0b09db871127c0.setIcon(icon_3fb0c07a86e5e245772e26c58b14d2f3);
+        
+    
+        var popup_2ac4a08148534f7137ba8a48aa1ed01b = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_b9ae154ca273dee7081692d08915a303 = $(`<div id="html_b9ae154ca273dee7081692d08915a303" style="width: 100.0%; height: 100.0%;">Stop 12: Golden Gate Bridge</div>`)[0];
+                popup_2ac4a08148534f7137ba8a48aa1ed01b.setContent(html_b9ae154ca273dee7081692d08915a303);
+            
+        
+
+        marker_7d7d5a7d3a4428725c0b09db871127c0.bindPopup(popup_2ac4a08148534f7137ba8a48aa1ed01b)
+        ;
+
+        
+    
+    
+            var marker_917635a911c7dff1b6799153d3042f46 = L.marker(
+                [37.8313579, -122.4787012],
+                {}
+            ).addTo(map_39fc1f4eec30e41c80b441b36331cc46);
+        
+    
+            var icon_c74319c3a9faa5764b9930207326a602 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_917635a911c7dff1b6799153d3042f46.setIcon(icon_c74319c3a9faa5764b9930207326a602);
+        
+    
+        var popup_d2023688df68b78c728f41363a73feb1 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_6299ef9888524ff01582dfd318669db8 = $(`<div id="html_6299ef9888524ff01582dfd318669db8" style="width: 100.0%; height: 100.0%;">Origin: Golden Gate Bridge</div>`)[0];
+                popup_d2023688df68b78c728f41363a73feb1.setContent(html_6299ef9888524ff01582dfd318669db8);
+            
+        
+
+        marker_917635a911c7dff1b6799153d3042f46.bindPopup(popup_d2023688df68b78c728f41363a73feb1)
+        ;
+
+        
+    
+    
+            tile_layer_a9eaa640f7eeaf622ef2687c8fbe13ba.addTo(map_39fc1f4eec30e41c80b441b36331cc46);
+        
+</script>
+</html>
